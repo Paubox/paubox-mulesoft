@@ -39,13 +39,37 @@
                 "pattern": "^(.*)$"
               }
             },
+            "cc": {
+              "$id": "#/properties/data/properties/message/properties/cc",
+              "type": "array",
+              "title": "The CC Schema",
+              "items": {
+                "$id": "#/properties/data/properties/message/properties/cc/items",
+                "type": "string",
+                "title": "The Items Schema",
+                "default": "",
+                "examples": [
+                  "recipient3@host.com",
+                  "recipient4@host.com"
+                ],
+                "pattern": "^(.*)$"
+              }
+            },
             "bcc": {
               "$id": "#/properties/data/properties/message/properties/bcc",
               "type": "array",
               "title": "The BCC Schema",
-              "examples": [
-                "recipient3@host.com"
-              ]
+              "items": {
+                "$id": "#/properties/data/properties/message/properties/bcc/items",
+                "type": "string",
+                "title": "The Items Schema",
+                "default": "",
+                "examples": [
+                  "recipient5@host.com",
+                  "recipient6@host.com"
+                ],
+                "pattern": "^(.*)$"
+              }
             },
             "headers": {
               "$id": "#/properties/data/properties/message/properties/headers",
@@ -89,18 +113,20 @@
               "type": "object",
               "title": "Message body content",
               "oneOf": [
-                { "required": [
+                {
+                  "required": [
                     "text/plain"
                   ]
                 },
-                { "required": [
+                {
+                  "required": [
                     "text/html"
                   ]
-                },
+                }
               ],
               "properties": {
                 "text/plain": {
-                  "$id": "#/properties/data/properties/message/properties/content/properties/text/plain",
+                  "$id": "#/properties/data/properties/message/properties/content/properties/text\/plain",
                   "type": "string",
                   "title": "Text/plain message part",
                   "default": "",
@@ -109,7 +135,7 @@
                   ]
                 },
                 "text/html": {
-                  "$id": "#/properties/data/properties/message/properties/content/properties/text/html",
+                  "$id": "#/properties/data/properties/message/properties/content/properties/text\/html",
                   "type": "string",
                   "title": "Text/HTML message part",
                   "default": "",
@@ -118,6 +144,26 @@
                   ]
                 }
               }
+            },
+            "allowNonTLS": {
+              "$id": "#/properties/data/properties/message/properties/allowNonTLS",
+              "type": "boolean",
+              "title": "AllowNonTLS boolean value",
+              "default": false,
+              "examples": [
+                true,
+                false
+              ]
+            },
+            "forceSecureNotification": {
+              "$id": "#/properties/data/properties/message/properties/forceSecureNotification",
+              "type": "boolean",
+              "title": "forceSecureNotification boolean value",
+              "default": false,
+              "examples": [
+                true,
+                false
+              ]
             },
             "attachments": {
               "$id": "#/properties/data/properties/message/properties/attachments",
