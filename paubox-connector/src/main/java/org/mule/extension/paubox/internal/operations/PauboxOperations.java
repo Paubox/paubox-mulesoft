@@ -95,10 +95,9 @@ public class PauboxOperations extends ConnectorOperations<PauboxConfiguration, P
  */
   @DisplayName("Send Message")
   @Throws(PauboxErrorProvider.class)
-  @MediaType(value = MediaType.APPLICATION_JSON, strict = false)
-  //@InputJsonType(schema = "metadata/send-email-request-schema.json")
+  @MediaType(value = MediaType.APPLICATION_JSON, strict = false)  
   public Result<InputStream, ResponseStatus> sendMessage(@Config PauboxConfiguration configuration, @Connection PauboxConnection connection,
-                                                      @Summary("Send Message Body") @InputJsonType(schema = "metadata/send-email-request-schema.json") @Content Map<String, Object> messageBody
+                                                      @Summary("Send Message Body") @InputJsonType(schema = "metadata/send-message-request-schema.json") @Content Map<String, Object> messageBody
   ) {
 
       return newExecutionBuilder(configuration, connection)
