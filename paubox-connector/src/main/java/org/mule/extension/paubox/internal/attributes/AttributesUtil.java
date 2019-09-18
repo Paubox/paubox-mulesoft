@@ -1,6 +1,3 @@
-/**
- * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1 a copy of which has been included with this distribution in the LICENSE.md file.
- */
 package org.mule.extension.paubox.internal.attributes;
 
 import org.mule.extension.paubox.api.ResponseStatus;
@@ -30,14 +27,6 @@ public class AttributesUtil {
             logger.info("Error : ", e);
         }
         return  null;
-    }
-
-    public static ResponseStatus setResponseAttributesForSend(HttpResponse response) {
-
-        ResponseStatus responseStatus = new ResponseStatus();
-        responseStatus.setStatusCode(response.getStatusCode());
-        responseStatus.setHeaders(response.getHeaders());
-        return responseStatus;
     }
 
 }

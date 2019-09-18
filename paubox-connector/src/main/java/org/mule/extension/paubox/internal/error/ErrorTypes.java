@@ -1,6 +1,3 @@
-/**
- * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1 a copy of which has been included with this distribution in the LICENSE.md file.
- */
 package org.mule.extension.paubox.internal.error;
 
 import org.mule.runtime.extension.api.error.ErrorTypeDefinition;
@@ -21,12 +18,7 @@ public enum ErrorTypes implements ErrorTypeDefinition<ErrorTypes> {
     INTERNAL_SERVER_ERROR(500),
     NOT_IMPLEMENTED(501),
     BAD_GATEWAY(502),
-    SERVICE_UNAVAILABLE(503),
-    EMPTY_HEAD_COUNT(0, "X-Total-Count header is Blank"),
-    DEAD_TOKEN(1, "Dead access token"),
-    GENERIC_EXCEPTION(2),
-    UN_PROCESSABLE_ENTITY(422);
-
+    SERVICE_UNAVAILABLE(503);
 
     private static Map<Integer, ErrorTypes> map = new HashMap<>();
 

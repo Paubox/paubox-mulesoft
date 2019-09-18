@@ -1,6 +1,3 @@
-/**
- * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1 a copy of which has been included with this distribution in the LICENSE.md file.
- */
 package org.mule.extension.paubox.internal.service;
 
 import org.mule.extension.paubox.api.ResponseStatus;
@@ -28,8 +25,7 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
         super(config, connection);
     }
 
-
-    public Result<InputStream, ResponseStatus> getEmailDispositionResult(String sourceTrackingId) {        
+    public Result<InputStream, ResponseStatus> getEmailDispositionResult(String sourceTrackingId) {
     	String baseURI = getConfig().getAddress();
     	String apiUsername = getConfig().getApiUsername();
         String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MSG_RECEIPT).toString();
@@ -40,31 +36,23 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
         }
 
         CompletableFuture<HttpResponse> response = getConnection().sendAsyncRequest(HttpConstants.Method.GET,actualUrl,qParams, getAuthorizationHeader());
-                
-        System.out.println("THIS IS IMPLEMENTATION");
-        //System.out.println("RESPONSE CODE:" + response.get().getStatusCode());
-        //InputStream str22 = response.get().getEntity().getContent();
-        //String errorPayload = IOUtils.toString(str22, "UTF-8");
+
         checkErrorResponse(response);
         InputStream str = PauboxUtils.getContentInputStream(response);
-        System.out.println(IOUtils.toString((InputStream) str));
-        //System.out.println(response.get().getStatusCode());
-        System.out.println(Result.<InputStream,ResponseStatus>builder().output(str).attributes(setResponseAttributes(response)).build());
         return Result.<InputStream,ResponseStatus>builder().output(str).attributes(setResponseAttributes(response)).build();
 
     }
-        
+
     public Result<InputStream, ResponseStatus> getSendMessageResult(Map<String, Object> messageBody) {
     	String baseURI = getConfig().getAddress();
     	String apiUsername = getConfig().getApiUsername();
         String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MESSAGES).toString();
-       
+
         byte[] byteArray = PauboxUtils.getByteArrayData(messageBody);
 
         CompletableFuture<HttpResponse> response = getConnection().sendAsyncRequestWithoutQueryParam(HttpConstants.Method.POST, actualUrl, byteArray, getAuthorizationHeader());
         checkErrorResponse(response);
         InputStream str = PauboxUtils.getContentInputStream(response);
-        System.out.println(IOUtils.toString(str));
         return Result.<InputStream,ResponseStatus>builder().output(str).attributes(setResponseAttributes(response)).build();
     }
 

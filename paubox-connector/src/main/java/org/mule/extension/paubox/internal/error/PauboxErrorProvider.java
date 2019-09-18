@@ -1,6 +1,3 @@
-/**
- * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1 a copy of which has been included with this distribution in the LICENSE.md file.
- */
 package org.mule.extension.paubox.internal.error;
 
 import org.mule.runtime.extension.api.annotation.error.ErrorTypeProvider;
@@ -29,10 +26,6 @@ public class PauboxErrorProvider implements ErrorTypeProvider {
         errors.add(NOT_IMPLEMENTED);
         errors.add(BAD_GATEWAY);
         errors.add(SERVICE_UNAVAILABLE);
-        errors.add(EMPTY_HEAD_COUNT);
-        errors.add(DEAD_TOKEN);
-        errors.add(GENERIC_EXCEPTION);
-        errors.add(UN_PROCESSABLE_ENTITY);
         return errors;
     }
 }

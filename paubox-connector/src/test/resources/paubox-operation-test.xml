@@ -4,8 +4,7 @@
       xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
           http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
 
-    <paubox:config name="Paubox_Config" address="https://api.paubox.net/v1/" apiKey="a54e7ed9aa45d228b7823a2fca3a7b95" apiUsername="undefeatedgames"/>
-
+    <paubox:config name="Paubox_Config" address="https://api.paubox.net/v1/" apiKey="test_key" apiUsername="testuser"/>
 
 	<flow name="sendMessageFlow">
 		<paubox:send-message config-ref="Paubox_Config">
@@ -30,10 +29,6 @@
 			</paubox:message-body>
 		</paubox:send-message>
 	</flow>
-	<flow name="sayHiFlow">
-        <paubox:say-hi person="Mariano Gonzales"/>
-    </flow>
-
 
     <flow name="getEmailDispositionFlow">
 		<paubox:get-email-disposition config-ref="Paubox_Config" sourceTrackingId="1aed91d1-f7ce-4c3d-8df2-85ecd225a7fc"/>

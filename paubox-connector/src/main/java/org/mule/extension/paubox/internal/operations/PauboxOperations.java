@@ -1,7 +1,5 @@
 package org.mule.extension.paubox.internal.operations;
 
-
-
 import java.io.InputStream;
 import java.util.Map;
 import org.mule.extension.paubox.api.ResponseStatus;
@@ -36,29 +34,6 @@ public class PauboxOperations extends ConnectorOperations<PauboxConfiguration, P
     }
 
   /**
-   * Example of an operation that uses the configuration and a connection instance to perform some action.
-   */
-//  @MediaType(value = ANY, strict = false)
-//  public String retrieveInfo(@Config PauboxConfiguration configuration, @Connection PauboxConnection connection){
-//    return "Using Configuration [" + configuration.getConfigId() + "] with Connection id [" + connection.getId() + "]";
-//  }
-
-  /**
-   * Example of a simple operation that receives a string parameter and returns a new string message that will be set on the payload.
-   */
-  @MediaType(value = ANY, strict = false)
-  public String sayHi(String person) {
-    return buildHelloMessage(person);
-  }
-
-  /**
-   * Private Methods are not exposed as operations
-   */
-  private String buildHelloMessage(String person) {
-    return "Hello " + person + "!!!";
-  }
-
-  /**
    * Get email disposition
    *
    * @param configuration    Paubox configurations
@@ -74,20 +49,14 @@ public class PauboxOperations extends ConnectorOperations<PauboxConfiguration, P
   public Result<InputStream, ResponseStatus> getEmailDisposition(@Config PauboxConfiguration configuration, @Connection PauboxConnection connection,
                                                          String sourceTrackingId
   ) {
-	  System.out.println("THIS IS OPERATION RESPONSE");
-	  System.out.println(newExecutionBuilder(configuration, connection)
-              .execute(APIService::getEmailDispositionResult)
-              .withParam(sourceTrackingId));
-      return newExecutionBuilder(configuration, connection)
+	     return newExecutionBuilder(configuration, connection)
               .execute(APIService::getEmailDispositionResult)
               .withParam(sourceTrackingId);
   }
-  
-  
-  
+
  /**
   * Send Message
-  * 
+  *
   * @param configuration Paubox configurations
   * @param connection  Paubox connection object
   * @param messageBody Message Body
@@ -95,7 +64,7 @@ public class PauboxOperations extends ConnectorOperations<PauboxConfiguration, P
  */
   @DisplayName("Send Message")
   @Throws(PauboxErrorProvider.class)
-  @MediaType(value = MediaType.APPLICATION_JSON, strict = false)  
+  @MediaType(value = MediaType.APPLICATION_JSON, strict = false)
   public Result<InputStream, ResponseStatus> sendMessage(@Config PauboxConfiguration configuration, @Connection PauboxConnection connection,
                                                       @Summary("Send Message Body") @InputJsonType(schema = "metadata/send-message-request-schema.json") @Content Map<String, Object> messageBody
   ) {

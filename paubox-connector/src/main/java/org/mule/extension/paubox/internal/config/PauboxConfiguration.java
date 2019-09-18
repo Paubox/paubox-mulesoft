@@ -30,10 +30,6 @@ public class PauboxConfiguration implements ConnectorConfig {
         return address;
     }
 
-//    public void setAddress(String addressValue) {
-//        address = addressValue;
-//    }
-
     public static String getAddressValue(){
         return address;
     }

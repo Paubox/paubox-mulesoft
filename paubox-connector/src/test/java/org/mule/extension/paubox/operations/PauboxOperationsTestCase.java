@@ -1,13 +1,11 @@
 package org.mule.extension.paubox.operations;
 
-
 import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.mule.extension.paubox.common.TestDataBuilder;
 import org.mule.functional.junit4.MuleArtifactFunctionalTestCase;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.metadata.DataType;
-
 
 import static org.hamcrest.Matchers.is;
 
@@ -30,27 +28,21 @@ public class PauboxOperationsTestCase extends MuleArtifactFunctionalTestCase {
     return "paubox-operation-test.xml";
   }
 
-
   @Test
   public void executeGetEmailDispositionFlowOperation() throws Exception {
 	  Map<String, Object> pauboxData=TestDataBuilder.getEmailDispositionData();
 	  Event pauboxTest = flowRunner("getEmailDispositionFlow").run();
 	  Object payloadValue=  pauboxTest.getMessage().getPayload().getValue();
-      JSONObject obj = new JSONObject(payloadValue);
-      System.out.println("THIS IS RESPONSE:");
-      System.out.println(obj);
-      Assert.assertNotNull(obj);
+    JSONObject obj = new JSONObject(payloadValue);
+    Assert.assertNotNull(obj);
   }
-
 
   @Test
   public void executeSendMessageFlowOperation() throws Exception {
 	  //Map<String, Object> pauboxData=TestDataBuilder.getEmailDispositionData();
 	  Event pauboxTest = flowRunner("sendMessageFlow").run();
 	  Object payloadValue=  pauboxTest.getMessage().getPayload().getValue();
-      JSONObject obj = new JSONObject(payloadValue);
-      System.out.println("THIS IS MESSAGE RESPONSE:");
-      System.out.println(obj);
-      Assert.assertNotNull(obj);
+    JSONObject obj = new JSONObject(payloadValue);
+    Assert.assertNotNull(obj);
   }
 }

@@ -1,7 +1,6 @@
 package org.mule.extension.paubox.internal.connection.provider;
 
 import org.mule.extension.paubox.internal.connection.PauboxConnection;
-//import org.mule.extension.paubox.internal.PauboxConnectionParameter;
 import org.mule.extension.paubox.internal.error.exception.PauboxConnectorException;
 import org.mule.extension.paubox.internal.util.Urls;
 import org.mule.connectors.commons.template.connection.ConnectorConnectionProvider;
@@ -50,20 +49,11 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
 //    @Placement(order = 1)
 //    private PauboxConnectionParameter connectionParams;
 
-//    @Parameter
-//    private String username;
-//    @Parameter
-//    private String password;
-
-    //private HttpAuthentication authGen;
-
     @Inject
     private HttpService httpService;
 
     @Override
     public PauboxConnection connect() throws ConnectionException {
-        //authGen = CreateAuthentication.createAuth(username, password);
-
         HttpClient httpClient = httpService.getClientFactory().create(new HttpClientConfiguration.Builder()
                 .setName("PauboxConfiguration")
                 .build());
@@ -98,12 +88,4 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
           }
           return ConnectionValidationResult.success();
          }
-
-//         public String getUsername() {
-//          return username;
-//         }
-//
-//         public String getPassword() {
-//             return password;
-//        }
 }

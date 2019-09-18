@@ -1,8 +1,4 @@
-/**
- * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1 a copy of which has been included with this distribution in the LICENSE.md file.
- */
 package org.mule.extension.paubox.common;
-
 
 import java.util.HashMap;
 import java.util.Map;
@@ -96,23 +92,12 @@ public class TestDataBuilder {
 
 	        entry.put("applicationSource", applicationSource);
 
-
-
 	        return entry;
 	}
-
-
-
-
 
 	public static Map<String, Object> getEmailDispositionData() {
 		Map<String, Object> sourceTrackingData = new HashMap<>();
 		sourceTrackingData.put("sourceTrackingId", "964ff961-8ff8-4c43-8b56-f67672e561d8");
-//		loanData.put("format", "mismo");
-//		loanData.put("version", "3.3.1");
-//		loanData.put("borrowerId", BORROWER_ID_VALUE);
 		return sourceTrackingData;
 	}
-
-
 }

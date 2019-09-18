@@ -1,8 +1,4 @@
-/**
- * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1 a copy of which has been included with this distribution in the LICENSE.md file.
- */
 package org.mule.extension.paubox.internal.error.exception;
-
 
 import org.mule.extension.paubox.internal.error.ErrorTypes;
 import org.mule.runtime.core.api.util.IOUtils;
@@ -13,20 +9,16 @@ import java.io.InputStream;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-
 public class ResponseValidator {
 
     private final static org.slf4j.Logger logger = LoggerFactory.getLogger(ResponseValidator.class);
 
     public static boolean checkErrorResponse(CompletableFuture<HttpResponse> response) {
         try {
-            //ErrorList errors ;
-            //StringBuilder builder = new StringBuilder();
             if (!(response.get().getStatusCode() == 200 || response.get().getStatusCode() == 201
                     || response.get().getStatusCode() == 202 || response.get().getStatusCode() == 207)) {
                 InputStream str = response.get().getEntity().getContent();
                 String errorPayload = IOUtils.toString(str, "UTF-8");
-                //errors = new ObjectMapper().readValue(errorPayload, ErrorList.class);
                 throw new PauboxConnectorException(errorPayload, getError(response.get().getStatusCode()));
             }
             else
