@@ -27,7 +27,7 @@ public class PauboxOperationsTestCase extends MuleArtifactFunctionalTestCase {
    */
   @Override
   protected String getConfigFile() {
-    return "test-mule-config.xml";
+    return "paubox-operation-test.xml";
   }
 
 
