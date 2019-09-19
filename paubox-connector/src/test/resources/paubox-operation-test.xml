@@ -1,36 +1,20 @@
-<mule xmlns="http://www.mulesoft.org/schema/mule/core"
-      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-      xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
-      xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
           http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
 
-    <paubox:config name="Paubox_Config" address="https://api.paubox.net/v1/" apiKey="test_key" apiUsername="testuser"/>
+	<configuration-properties file="paubox-configuration.properties" />
+
+	<paubox:config name="Paubox_Config" address="${baseurl}"
+		apiKey="${apikey}" apiUsername="${apiusername}" />
 
 	<flow name="sendMessageFlow">
 		<paubox:send-message config-ref="Paubox_Config">
-			<paubox:message-body><![CDATA[#[{
-			  "data": {
-			    "message": {
-			      "recipients": [
-			        "vighneshtrivedi2004@gmail.com"
-			      ],
-			      "headers": {
-			        "from": "renee@undefeatedgames.com",
-			        "subject": "Testing from Mulesoft"
-			      },
-			      "content": {
-			        "text/plain": "Hello World!",
-			        "text/html": "<h1>Hello World!</h1>"
-			      },
-			      "attachments": []
-			    }
-			  }
-			}]]]>
-			</paubox:message-body>
 		</paubox:send-message>
 	</flow>
 
-    <flow name="getEmailDispositionFlow">
-		<paubox:get-email-disposition config-ref="Paubox_Config" sourceTrackingId="1aed91d1-f7ce-4c3d-8df2-85ecd225a7fc"/>
+	<flow name="getEmailDispositionFlow">
+		<paubox:get-email-disposition config-ref="Paubox_Config"
+			sourceTrackingId="#[vars.sourceTrackingId]" />
 	</flow>
 </mule>

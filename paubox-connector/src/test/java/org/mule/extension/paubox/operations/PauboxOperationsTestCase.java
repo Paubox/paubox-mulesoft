@@ -20,29 +20,50 @@ import static org.mule.extension.paubox.common.TestDataBuilder.*;
 
 public class PauboxOperationsTestCase extends MuleArtifactFunctionalTestCase {
 
-  /**
-   * Specifies the mule config xml with the flows that are going to be executed in the tests, this file lives in the test resources.
-   */
-  @Override
-  protected String getConfigFile() {
-    return "paubox-operation-test.xml";
-  }
+	/**
+	 * Specifies the mule config xml with the flows that are going to be executed in
+	 * the tests, this file lives in the test resources.
+	 */
+	@Override
+	protected String getConfigFile() {
+		return "paubox-operation-test.xml";
+	}
 
-  @Test
-  public void executeGetEmailDispositionFlowOperation() throws Exception {
-	  Map<String, Object> pauboxData=TestDataBuilder.getEmailDispositionData();
-	  Event pauboxTest = flowRunner("getEmailDispositionFlow").run();
-	  Object payloadValue=  pauboxTest.getMessage().getPayload().getValue();
-    JSONObject obj = new JSONObject(payloadValue);
-    Assert.assertNotNull(obj);
-  }
+	@Test
+	public void executeGetEmailDispositionFlowOperation_Success() throws Exception {
+		Map<String, Object> sourceTrackingData = TestDataBuilder.getSuccessfulEmailDispositionData();
+		Event pauboxTest = flowRunner("getEmailDispositionFlow")
+				.withVariable("sourceTrackingId", sourceTrackingData.get("sourceTrackingId")).run();
+		Object attributes = pauboxTest.getMessage().getAttributes().getValue();
+		JSONObject objAttributes = new JSONObject(attributes);
+		Assert.assertEquals(200, objAttributes.getInt("statusCode"));
+	}
 
-  @Test
-  public void executeSendMessageFlowOperation() throws Exception {
-	  //Map<String, Object> pauboxData=TestDataBuilder.getEmailDispositionData();
-	  Event pauboxTest = flowRunner("sendMessageFlow").run();
-	  Object payloadValue=  pauboxTest.getMessage().getPayload().getValue();
-    JSONObject obj = new JSONObject(payloadValue);
-    Assert.assertNotNull(obj);
-  }
+	@Test
+	public void executeGetEmailDispositionFlowOperation_Failure() throws Exception {
+		Map<String, Object> sourceTrackingData = TestDataBuilder.getFailureEmailDispositionData();
+		Event pauboxTest = flowRunner("getEmailDispositionFlow")
+				.withVariable("sourceTrackingId", sourceTrackingData.get("sourceTrackingId")).run();
+		Object attributes = pauboxTest.getMessage().getAttributes().getValue();
+		JSONObject objAttributes = new JSONObject(attributes);
+		Assert.assertEquals(404, objAttributes.getInt("statusCode"));
+	}
+
+	@Test
+	public void executeSendMessageFlowOperation_Success() throws Exception {
+		Map<String, Object> pauboxData = TestDataBuilder.createMessageData();
+		Event pauboxTest = flowRunner("sendMessageFlow").withPayload(pauboxData).run();
+		Object attributes = pauboxTest.getMessage().getAttributes().getValue();
+		JSONObject objAttributes = new JSONObject(attributes);
+		Assert.assertEquals(200, objAttributes.getInt("statusCode"));
+	}
+
+	@Test
+	public void executeSendMessageFlowOperation_Failure() throws Exception {
+		Map<String, Object> pauboxData = TestDataBuilder.createInvalidMessageData();
+		Event pauboxTest = flowRunner("sendMessageFlow").withPayload(pauboxData).run();
+		Object attributes = pauboxTest.getMessage().getAttributes().getValue();
+		JSONObject objAttributes = new JSONObject(attributes);
+		Assert.assertEquals(400, objAttributes.getInt("statusCode"));
+	}
 }
