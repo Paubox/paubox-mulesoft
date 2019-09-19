@@ -1,0 +1,52 @@
+package org.mule.extension.paubox.internal.util;
+
+import com.google.gson.Gson;
+import org.apache.commons.io.IOUtils;
+import org.mule.runtime.http.api.domain.message.response.HttpResponse;
+import org.slf4j.LoggerFactory;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Map;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
+
+public class PauboxUtils {
+
+    private final static org.slf4j.Logger logger = LoggerFactory.getLogger(PauboxUtils.class);
+
+    public static InputStream getContentInputStream(CompletableFuture<HttpResponse> response) {
+
+        InputStream inputStream = null;
+        try {
+            inputStream = response.get().getEntity().getContent();
+            return inputStream;
+        } catch (ExecutionException ex) {
+            logger.info("Error : ", ex);
+        } catch (InterruptedException ex) {
+            logger.info("Error : ", ex);
+        } catch (Exception ex) {
+            logger.info("Error : ", ex);
+        }
+        return inputStream;
+    }
+
+    public static byte[] getByteArrayData(Map map){
+        Gson gson = new Gson();
+        String jsonBody = gson.toJson(map);
+        byte[] byteArrayData = jsonBody.getBytes(StandardCharsets.UTF_8);
+        return byteArrayData;
+    }
+
+    public static byte[] getByteArrayFromInputStream(InputStream is){
+        byte[] byteArray = new byte[0];
+
+        try {
+            byteArray = IOUtils.toByteArray(is);
+        } catch (IOException e) {
+            logger.info("Error while getting byte array from input stream :", e);
+        }
+        return byteArray;
+    }
+}

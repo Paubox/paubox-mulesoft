@@ -1,0 +1,86 @@
+{
+  "definitions": {},
+  "$schema": "http://json-schema.org/draft-06/schema#",
+  "type": "object",
+  "$id": "http://example.com/example.json",
+  "title": "GetEmailDispositionResponseSchema",
+  "required": [
+    "sourceTrackingId",
+    "data"
+  ],
+  "properties": {
+    "sourceTrackingId": {
+      "type": "string",
+      "$id": "/properties/sourceTrackingId"
+    },
+    "data": {
+      "type": "object",
+      "$id": "/properties/data",
+      "required": [
+        "message"
+      ],
+      "properties": {
+        "message": {
+          "type": "object",
+          "$id": "/properties/data/properties/message",
+          "required": [
+            "id",
+            "message_deliveries"
+          ],
+          "properties": {
+            "id": {
+              "type": "string",
+              "$id": "/properties/data/properties/message/id"
+            },
+            "message_deliveries": {
+              "type": "array",
+              "$id": "/properties/data/properties/message/message_deliveries",
+              "items": {
+                "type": "object",
+                "$id": "/properties/data/properties/message/message_deliveries/items",
+                "required": [
+                  "recipient",
+                  "status"
+                ],
+                "properties": {
+                  "recipient": {
+                    "type": "string",
+                    "$id": "/properties/data/properties/message/message_deliveries/items/properties/recipient"
+                  },
+                  "status": {
+                    "type": "object",
+                    "$id": "/properties/data/properties/message/message_deliveries/items/properties/status",
+                    "required": [
+                      "deliveryStatus",
+                      "deliveryTime",
+                      "openedStatus",
+                      "openedTime"
+                    ],
+                    "properties": {
+                      "deliveryStatus": {
+                        "type": "string",
+                        "$id": "/properties/data/properties/message/message_deliveries/items/properties/status/properties/deliveryStatus"
+                      },
+                      "deliveryTime": {
+                        "type": "string",
+                        "$id": "/properties/data/properties/message/message_deliveries/items/properties/status/properties/deliveryTime"
+                      },
+                      "openedStatus": {
+                        "type": "string",
+                        "$id": "/properties/data/properties/message/message_deliveries/items/properties/status/properties/openedStatus"
+                      },
+                      "openedTime": {
+                        "type": "string",
+                        "$id": "/properties/data/properties/message/message_deliveries/items/properties/status/properties/openedTime"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
