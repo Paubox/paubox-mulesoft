@@ -21,9 +21,9 @@ public class TestDataBuilder {
 		List<String> recipientList = new ArrayList<>();
 
 		header.put("subject", "Mulesoft Test");
-		header.put("from", "renee@undefeatedgames.com");
+		header.put("from", "sender@domain.com");
 		content.put("text/plain", "This is a Test from Mulesoft Connector");
-		recipientList.add("vighneshtrivedi2004@gmail.com");
+		recipientList.add("recipient@test.com");
 
 		message.put("recipients", recipientList);
 		message.put("headers", header);
@@ -46,9 +46,9 @@ public class TestDataBuilder {
 		List<String> recipientList = new ArrayList<>();
 
 		header.put("subject", "Mulesoft Test");
-		header.put("from", "renee@undefeatedgames.com");
+		header.put("from", "sender@domain.com");
 		content.put("text/plain", "This is a Test from Mulesoft Connector");
-		recipientList.add("vighneshtrivedi2004");
+		recipientList.add("recipient");
 
 		message.put("recipients", recipientList);
 		message.put("headers", header);
