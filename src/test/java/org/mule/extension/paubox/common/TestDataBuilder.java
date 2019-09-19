@@ -23,7 +23,7 @@ public class TestDataBuilder {
 		header.put("subject", "Mulesoft Test");
 		header.put("from", "sender@domain.com");
 		content.put("text/plain", "This is a Test from Mulesoft Connector");
-		recipientList.add("recipient@test.com");
+		recipientList.add("recipient@domain.com");
 
 		message.put("recipients", recipientList);
 		message.put("headers", header);
