@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
+	<flow name="get-email-disposition-flow" doc:id="8c4e9b74-f953-48f2-bb00-2c6d824319c8" >
+		<http:listener doc:name="Listener" doc:id="fb6dcec6-d187-4862-b1c5-85fbad3caece" config-ref="HTTP_Listener_config" path="get-email-disposition/{sourceTrackingId}"/>
+		<paubox:get-email-disposition doc:name="Get Email Disposition" doc:id="020ac8d8-3aa7-4e7f-ad4f-a2826592bffa" config-ref="Paubox_Config" sourceTrackingId="#[attributes.uriParams.sourceTrackingId]"/>
+	</flow>
+</mule>
