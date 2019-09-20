@@ -18,7 +18,9 @@ public enum ErrorTypes implements ErrorTypeDefinition<ErrorTypes> {
     INTERNAL_SERVER_ERROR(500),
     NOT_IMPLEMENTED(501),
     BAD_GATEWAY(502),
-    SERVICE_UNAVAILABLE(503);
+    SERVICE_UNAVAILABLE(503),
+    INVALID_CONFIG(1, "Invalid Configuration"),
+    GENERIC_EXCEPTION(2);
 
     private static Map<Integer, ErrorTypes> map = new HashMap<>();
 
