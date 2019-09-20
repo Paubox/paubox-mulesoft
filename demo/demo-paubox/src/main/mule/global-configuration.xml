@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
+	<http:listener-config name="HTTP_Listener_config"
+		doc:name="HTTP Listener config" doc:id="2d6b666f-dad6-4183-ae0e-0253ec82a02f">
+		<http:listener-connection host="localhost"
+			port="8081" />
+	</http:listener-config>
+	<paubox:config name="Paubox_Config" doc:name="Paubox Config"
+		doc:id="85a09651-3590-4900-b40e-3d5ae9b0981b" address="${paubox.baseurl}"
+		apiKey="${paubox.apikey}" apiUsername="${paubox.apiusername}" />
+	<configuration-properties doc:name="Configuration properties"
+		doc:id="cbb10a67-5a62-41f5-a14e-684a876eb4ba" file="configuration.yaml" />
+</mule>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
+	<flow name="send-message-flow" doc:id="7904d12a-64bc-4035-bd09-21f3b2c59c6b">
+		<http:listener doc:name="Listener"
+			doc:id="212758af-6e9c-43f0-8512-2837087602d2" config-ref="HTTP_Listener_config"
+			path="/send-message" />
+		<paubox:send-message doc:name="Send Message"
+			doc:id="26f79e75-0b06-4997-8aac-655e992dad42" config-ref="Paubox_Config">
+			<paubox:message-body><![CDATA[#[{
+  "data": {
+    "message": {
+      "recipients": [
+        "recipient@domain.com"
+      ],
+      "headers": {
+        "from": "sender@domain.com",
+        "subject": "Testing from Mulesoft"
+      },
+      "content": {
+        "text/plain": "Hello World!",
+        "text/html": "<h1>Hello World!</h1>"
+      },
+      "attachments": []
+    }
+  }
+}]]]></paubox:message-body>
+		</paubox:send-message>
+	</flow>
+</mule>

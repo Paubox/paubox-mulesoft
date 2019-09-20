@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
+
+	<flow name="pauboxAPIFlow" doc:id="8f2e1fde-e7e1-4673-9a77-d9a630eada5c">
+		<http:listener doc:name="Listener"
+			doc:id="27c1fbba-bc1a-49f9-94a0-183e6ed4fae0" config-ref="HTTP_Listener_config"
+			path="/pauboxAPIFlow" />
+		<paubox:send-message doc:name="Send Message"
+			doc:id="1b2320df-eac2-48f8-9dcf-9101ace2594d" config-ref="Paubox_Config">
+			<paubox:message-body><![CDATA[#[{
+  "data": {
+    "message": {
+      "recipients": [
+        "recipient@domain.com"
+      ],
+      "headers": {
+        "from": "sender@domain.com",
+        "subject": "Testing from Mulesoft"
+      },
+      "content": {
+        "text/plain": "Hello World!",
+        "text/html": "<h1>Hello World!</h1>"
+      },
+      "attachments": []
+    }
+  }
+}]]]></paubox:message-body>
+		</paubox:send-message>
+		<set-variable
+			value="#[%dw 2.0
+output application/java
+---
+payload.sourceTrackingId]"
+			doc:name="Save Source Tracking Id" doc:id="6d50b287-a788-4d35-ae6d-7372d4a5e9be"
+			variableName="sourceTrackingId" />
+		<paubox:get-email-disposition doc:name="Get Email Disposition"
+			doc:id="cd6908fc-0fbc-447f-999c-c733ac99a83d" sourceTrackingId="#[vars.sourceTrackingId]"
+			config-ref="Paubox_Config" />
+
+
+	</flow>
+</mule>
