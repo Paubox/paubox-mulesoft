@@ -241,7 +241,7 @@ target/
 catalog/
 reports/
 .mule/
-sample_rest_api_usage/
+.tooling*/
 **/*.mflow
 ### Windows ###
 # Windows thumbnail cache files
