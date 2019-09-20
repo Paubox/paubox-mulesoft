@@ -26,6 +26,8 @@ public class PauboxErrorProvider implements ErrorTypeProvider {
         errors.add(NOT_IMPLEMENTED);
         errors.add(BAD_GATEWAY);
         errors.add(SERVICE_UNAVAILABLE);
+        errors.add(INVALID_CONFIG);
+        errors.add(GENERIC_EXCEPTION);
         return errors;
     }
 }
