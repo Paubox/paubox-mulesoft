@@ -5,10 +5,10 @@
 
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.mule.extension</groupId>
-    <artifactId>paubox-connector</artifactId>
-    <version>0.4.5-SNAPSHOT</version>
+    <artifactId>mule-paubox-connector</artifactId>
+    <version>0.4.9-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
-    <name>Paubox Extension</name>
+    <name>Paubox Mulesoft Connector</name>
 
 	<parent>
 	  <groupId>org.mule.extensions</groupId>

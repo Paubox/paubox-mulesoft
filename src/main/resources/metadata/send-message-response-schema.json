@@ -1,0 +1,26 @@
+{
+    "definitions": {},
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "type": "object",
+    "title": "Paubox REST API Send Message Response",
+    "required": [
+      "sourceTrackingId",
+      "data"
+    ],
+    "properties": {
+      "data": {
+        "$id": "#/properties/data",
+        "type": "string",
+        "examples": [
+          "Service OK"
+        ]
+      },
+      "sourceTrackingId": {
+        "$id": "#/properties/sourceTrackingId",
+        "type": "string",
+        "examples": [
+          "3d38ab13-0af8-4028-bd45-52e882e0d584"
+        ]
+      }
+    }
+  }
