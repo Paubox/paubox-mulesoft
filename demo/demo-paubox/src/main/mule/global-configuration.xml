@@ -13,7 +13,7 @@ http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/p
 			port="8081" />
 	</http:listener-config>
 	<paubox:config name="Paubox_Config" doc:name="Paubox Config"
-		doc:id="85a09651-3590-4900-b40e-3d5ae9b0981b" address="${paubox.baseurl}"
+		doc:id="85a09651-3590-4900-b40e-3d5ae9b0981b" apiBaseURL="${paubox.baseurl}"
 		apiKey="${paubox.apikey}" apiUsername="${paubox.apiusername}" />
 	<configuration-properties doc:name="Configuration properties"
 		doc:id="cbb10a67-5a62-41f5-a14e-684a876eb4ba" file="configuration.yaml" />

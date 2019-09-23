@@ -13,8 +13,8 @@ import static org.mule.runtime.api.meta.Category.SELECT;
 
 
 /**
- * This is the main class of an extension, is the entry point from which configurations, connection providers, operations
- * and sources are going to be declared.
+ * Send HIPAA compliant emails and obtain email delivery information with the Paubox REST API.
+ * For information about the Paubox REST API methods and parameters, see the https://www.paubox.com/solutions/email-api[Paubox REST API reference].
  */
 @Xml(prefix = "paubox")
 @Extension(name = "Paubox")

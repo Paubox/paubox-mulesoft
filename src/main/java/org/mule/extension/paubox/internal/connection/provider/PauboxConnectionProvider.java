@@ -16,7 +16,7 @@ import org.mule.runtime.http.api.client.auth.HttpAuthentication;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 import org.mule.runtime.http.api.tcp.TcpClientSocketProperties;
-import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getAddressValue;
+import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiBaseURLValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiKeyValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiUsernameValue;
 import static org.mule.extension.paubox.internal.error.ErrorTypes.getError;
@@ -30,26 +30,9 @@ import javax.inject.Inject;
 
 import java.util.concurrent.CompletableFuture;
 
-/**
- * This class (as it's name implies) provides connection instances and the
- * funcionality to disconnect and validate those connections.
- * <p>
- * All connection related parameters (values required in order to create a
- * connection) must be declared in the connection providers.
- * <p>
- * This particular example is a {@link PoolingConnectionProvider} which declares
- * that connections resolved by this provider will be pooled and reused. There
- * are other implementations like {@link CachedConnectionProvider} which lazily
- * creates and caches connections or simply {@link ConnectionProvider} if you
- * want a new connection each time something requires one.
- */
 public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnection> {
 
 	private static final Logger logger = LoggerFactory.getLogger(PauboxConnectionProvider.class);
-
-	// @ParameterGroup(name = CONNECTION)
-	// @Placement(order = 1)
-	// private PauboxConnectionParameter connectionParams;
 
 	@Inject
 	private HttpService httpService;
@@ -75,7 +58,7 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
 	@Override
 	public ConnectionValidationResult validate(PauboxConnection connection) {
 
-		String baseURI = getAddressValue();
+		String baseURI = getApiBaseURLValue();
 		String apiUsername = getApiUsernameValue();
 
 		if (apiUsername == null || apiUsername.isEmpty()) {

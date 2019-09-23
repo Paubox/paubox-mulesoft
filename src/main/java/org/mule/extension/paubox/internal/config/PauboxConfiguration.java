@@ -7,6 +7,8 @@ import org.mule.runtime.extension.api.annotation.Operations;
 import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.runtime.extension.api.annotation.param.Optional;
+import org.mule.runtime.extension.api.annotation.param.display.Summary;
+
 /**
  * This class represents an extension configuration, values set in this class are commonly used across multiple
  * operations since they represent something core from the extension.
@@ -17,21 +19,24 @@ public class PauboxConfiguration implements ConnectorConfig {
 
     @Parameter
     @Optional(defaultValue = "https://api.paubox.net/v1/")
-    protected static String address;
+    @Summary("Base URL of the Paubox REST API")
+    protected static String apiBaseURL;
 
     @Parameter
+    @Summary("Paubox API Key")
     protected static String apiKey;
 
     @Parameter
+    @Summary("Paubox API Username")
     protected static String apiUsername;
 
 
-    public String getAddress() {
-        return address;
+    public String getApiBaseURL() {
+        return apiBaseURL;
     }
 
-    public static String getAddressValue(){
-        return address;
+    public static String getApiBaseURLValue(){
+        return apiBaseURL;
     }
 
     public String getApiUsername() {
