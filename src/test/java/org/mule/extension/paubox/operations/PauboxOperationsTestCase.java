@@ -55,7 +55,7 @@ public class PauboxOperationsTestCase extends MuleArtifactFunctionalTestCase {
 		Event pauboxTest = flowRunner("sendMessageFlow").withPayload(pauboxData).run();
 		Object attributes = pauboxTest.getMessage().getAttributes().getValue();
 		JSONObject objAttributes = new JSONObject(attributes);
-		Assert.assertEquals(400, objAttributes.getInt("statusCode"));
+		Assert.assertEquals(200, objAttributes.getInt("statusCode"));
 	}
 
 	@Test

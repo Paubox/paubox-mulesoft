@@ -4,14 +4,51 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.Properties;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class TestDataBuilder {
+
+	private final static Properties propTest;
+
+	static {
+        try {
+            propTest = loadPropertiesFile();
+        } catch (IOException ioe) {
+            System.out.println("Exception: " + ioe);
+			throw new RuntimeException(ioe);
+        }
+    }
 
 	private TestDataBuilder() {
 		throw new IllegalStateException("Test DataBuilder Class");
 	}
 
-	public static Map<String, Object> createMessageData() {
+	private static Properties loadPropertiesFile() throws IOException {
+		Properties prop = new Properties();
+		InputStream input = null;
+		try {
+			input = new FileInputStream("src/test/resources/paubox-configuration.properties");
+			if (input != null) {
+				// load the properties file
+				prop.load(input);
+				return prop;
+			} else {
+				throw new FileNotFoundException("Property file paubox-configuration.properties not found.");
+			}
+		} catch (IOException ioe) {
+			throw ioe;
+		} finally {
+			if (input != null) {
+				input.close();
+			}
+		}
+	}
+
+	public static Map<String, Object> createMessageData() throws Exception {
 
 		Map<String, Object> message = new HashMap<>();
 		Map<String, Object> content = new HashMap<>();
@@ -20,10 +57,10 @@ public class TestDataBuilder {
 		Map<String, Object> data = new HashMap<>();
 		List<String> recipientList = new ArrayList<>();
 
-		header.put("subject", "Mulesoft Test");
-		header.put("from", "sender@domain.com");
-		content.put("text/plain", "This is a Test from Mulesoft Connector");
-		recipientList.add("recipient@domain.com");
+		header.put("subject", "Paubox Mulesoft Test");
+		header.put("from", propTest.getProperty("test.senderEmail"));
+		content.put("text/plain", "This is a Test from Paubox Mulesoft Connector");
+		recipientList.add(propTest.getProperty("test.receiverEmail"));
 
 		message.put("recipients", recipientList);
 		message.put("headers", header);
@@ -36,7 +73,7 @@ public class TestDataBuilder {
 		return request;
 	}
 
-	public static Map<String, Object> createInvalidMessageData() {
+	public static Map<String, Object> createInvalidMessageData() throws Exception {
 
 		Map<String, Object> message = new HashMap<>();
 		Map<String, Object> content = new HashMap<>();
@@ -45,9 +82,9 @@ public class TestDataBuilder {
 		Map<String, Object> data = new HashMap<>();
 		List<String> recipientList = new ArrayList<>();
 
-		header.put("subject", "Mulesoft Test");
-		header.put("from", "sender@domain.com");
-		content.put("text/plain", "This is a Test from Mulesoft Connector");
+		header.put("subject", "Paubox Mulesoft Test");
+		header.put("from", propTest.getProperty("test.senderEmail"));
+		content.put("text/plain", "This is a Test from Paubox Mulesoft Connector");
 		recipientList.add("recipient");
 
 		message.put("recipients", recipientList);
