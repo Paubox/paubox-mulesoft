@@ -24,11 +24,6 @@ public class PauboxOperationsTestCase extends MuleArtifactFunctionalTestCase {
 	 * Specifies the mule config xml with the flows that are going to be executed in
 	 * the tests, this file lives in the test resources.
 	 */
-
-	public PauboxOperationsTestCase() throws Exception {
-		TestDataBuilder.loadPropertiesFile();
-	}
-
 	@Override
 	protected String getConfigFile() {
 		return "paubox-operation-test.xml";

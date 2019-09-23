@@ -12,27 +12,39 @@ import java.io.IOException;
 
 public class TestDataBuilder {
 
-	private static Properties propTest = new Properties();
+	private final static Properties propTest;
+
+	static {
+        try {
+            propTest = loadPropertiesFile();
+        } catch (IOException ioe) {
+            System.out.println("Exception: " + ioe);
+			throw new RuntimeException(ioe);
+        }
+    }
 
 	private TestDataBuilder() {
 		throw new IllegalStateException("Test DataBuilder Class");
 	}
 
-	public static void loadPropertiesFile() throws IOException {
+	private static Properties loadPropertiesFile() throws IOException {
+		Properties prop = new Properties();
 		InputStream input = null;
 		try {
-			input = new FileInputStream("src/test/resources/paubox-condiguration.properties");
-
+			input = new FileInputStream("src/test/resources/paubox-configuration.properties");
 			if (input != null) {
 				// load the properties file
-				propTest.load(input);
+				prop.load(input);
+				return prop;
 			} else {
 				throw new FileNotFoundException("Property file paubox-configuration.properties not found.");
 			}
-		} catch (Exception e) {
-			System.out.println("Exception: " + e);
+		} catch (IOException ioe) {
+			throw ioe;
 		} finally {
-			input.close();
+			if (input != null) {
+				input.close();
+			}
 		}
 	}
 
@@ -45,9 +57,9 @@ public class TestDataBuilder {
 		Map<String, Object> data = new HashMap<>();
 		List<String> recipientList = new ArrayList<>();
 
-		header.put("subject", "Mulesoft Test");
+		header.put("subject", "Paubox Mulesoft Test");
 		header.put("from", propTest.getProperty("test.senderEmail"));
-		content.put("text/plain", "This is a Test from Mulesoft Connector");
+		content.put("text/plain", "This is a Test from Paubox Mulesoft Connector");
 		recipientList.add(propTest.getProperty("test.receiverEmail"));
 
 		message.put("recipients", recipientList);
@@ -70,9 +82,9 @@ public class TestDataBuilder {
 		Map<String, Object> data = new HashMap<>();
 		List<String> recipientList = new ArrayList<>();
 
-		header.put("subject", "Mulesoft Test");
+		header.put("subject", "Paubox Mulesoft Test");
 		header.put("from", propTest.getProperty("test.senderEmail"));
-		content.put("text/plain", "This is a Test from Mulesoft Connector");
+		content.put("text/plain", "This is a Test from Paubox Mulesoft Connector");
 		recipientList.add("recipient");
 
 		message.put("recipients", recipientList);
