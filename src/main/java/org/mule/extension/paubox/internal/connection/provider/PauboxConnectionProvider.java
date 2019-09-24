@@ -21,7 +21,6 @@ import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getA
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiUsernameValue;
 import static org.mule.extension.paubox.internal.error.ErrorTypes.getError;
 import static org.mule.extension.paubox.internal.util.RequestService.sendAsyncRequest;
-//import static org.mule.runtime.extension.api.annotation.param.ParameterGroup.CONNECTION;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
