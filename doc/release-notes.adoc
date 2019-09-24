@@ -1,11 +1,6 @@
 = Anypoint™ Paubox Connector Release Notes
 
 
-== References:
-
-- *Supported Mule ESB versions*: 3.5 and  3.6
-- *Connector Doc*: <paubox_URL>
-
 == Paubox Connector Release Notes
 
 === Contents

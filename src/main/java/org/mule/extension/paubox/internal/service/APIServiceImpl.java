@@ -26,7 +26,7 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
     }
 
     public Result<InputStream, ResponseStatus> getEmailDispositionResult(String sourceTrackingId) {
-    	String baseURI = getConfig().getAddress();
+    	String baseURI = getConfig().getApiBaseURL();
     	String apiUsername = getConfig().getApiUsername();
         String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MSG_RECEIPT).toString();
 
@@ -44,7 +44,7 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
     }
 
     public Result<InputStream, ResponseStatus> getSendMessageResult(Map<String, Object> messageBody) {
-    	String baseURI = getConfig().getAddress();
+    	String baseURI = getConfig().getApiBaseURL();
     	String apiUsername = getConfig().getApiUsername();
         String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MESSAGES).toString();
 

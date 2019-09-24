@@ -7,17 +7,17 @@ import org.mule.runtime.extension.api.annotation.Extension;
 import org.mule.runtime.extension.api.annotation.Configurations;
 import org.mule.runtime.extension.api.annotation.connectivity.ConnectionProviders;
 import org.mule.runtime.extension.api.annotation.dsl.xml.Xml;
-//import org.mule.runtime.extension.api.annotation.license.RequiresEnterpriseLicense;
+import org.mule.runtime.extension.api.annotation.license.RequiresEnterpriseLicense;
 
-import static org.mule.runtime.api.meta.Category.SELECT;
-
+import static org.mule.runtime.api.meta.Category.CERTIFIED;
 
 /**
- * This is the main class of an extension, is the entry point from which configurations, connection providers, operations
- * and sources are going to be declared.
+ * Send HIPAA compliant emails and obtain email delivery information with the Paubox REST API.
+ * For information about the Paubox REST API methods and parameters, see the https://www.paubox.com/solutions/email-api[Paubox REST API reference].
  */
 @Xml(prefix = "paubox")
-@Extension(name = "Paubox")
+@Extension(name = "Paubox", category = CERTIFIED)
+@RequiresEnterpriseLicense(allowEvaluationLicense = true)
 @Configurations(PauboxConfiguration.class)
 @ConnectionProviders(PauboxConnectionProvider.class)
 @org.mule.runtime.extension.api.annotation.error.ErrorTypes(ErrorTypes.class)

@@ -38,7 +38,7 @@ public class PauboxOperations extends ConnectorOperations<PauboxConfiguration, P
    *
    * @param configuration    Paubox configurations
    * @param connection Paubox connection object
-   * @param sourceTrackingId     Source Tracking ID
+   * @param sourceTrackingId     Message's Source Tracking ID
    * @return email details in given format
    */
 
