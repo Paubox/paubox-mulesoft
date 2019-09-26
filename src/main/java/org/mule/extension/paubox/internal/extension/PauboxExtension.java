@@ -13,7 +13,7 @@ import static org.mule.runtime.api.meta.Category.CERTIFIED;
 
 /**
  * Send HIPAA compliant emails and obtain email delivery information with the Paubox REST API.
- * For information about the Paubox REST API methods and parameters, see the https://www.paubox.com/solutions/email-api[Paubox REST API reference].
+ * For information about the Paubox REST API methods and parameters, please check https://www.paubox.com/solutions/email-api
  */
 @Xml(prefix = "paubox")
 @Extension(name = "Paubox", category = CERTIFIED)
