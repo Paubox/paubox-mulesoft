@@ -13,12 +13,11 @@ import org.mule.runtime.api.util.MultiMap;
 import org.mule.runtime.extension.api.runtime.operation.Result;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
+import org.mule.runtime.core.api.util.IOUtils;
 
 import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-
-import org.mule.runtime.core.api.util.IOUtils;
 
 import static org.mule.extension.paubox.internal.attributes.AttributesUtil.setResponseAttributes;
 import static org.mule.extension.paubox.internal.error.exception.ResponseValidator.checkErrorResponse;
