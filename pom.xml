@@ -47,6 +47,12 @@
 			<version>2.0.0</version>
 		</dependency>
 	</dependencies>
+	<scm>
+        <connection>scm:git:git@github.com:Paubox/paubox-mulesoft.git</connection>
+        <developerConnection>scm:git:git@github.com:Paubox/paubox-mulesoft.git</developerConnection>
+        <url>https://github.com/Paubox/paubox-mulesoft</url>
+		<tag>HEAD</tag>
+	</scm>
 	<build>
 		<plugins>
 			<plugin>
@@ -144,5 +150,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
 </project>
