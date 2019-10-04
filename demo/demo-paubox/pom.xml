@@ -34,7 +34,7 @@
 	<dependencies>
 
 		<dependency>
-			<groupId>org.mulesoft.connectors</groupId>
+			<groupId>com.mulesoft.connectors</groupId>
 			<artifactId>mule-paubox-connector</artifactId>
 			<version>1.0.0</version>
 			<classifier>mule-plugin</classifier>
