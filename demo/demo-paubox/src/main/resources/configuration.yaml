@@ -1,4 +1,4 @@
 paubox:
-  baseurl: ""
+  apiurl: ""
   apikey: ""
   apiusername: ""

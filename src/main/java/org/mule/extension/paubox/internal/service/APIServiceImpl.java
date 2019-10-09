@@ -28,9 +28,9 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
     }
 
     public Result<InputStream, ResponseStatus> getEmailDispositionResult(String sourceTrackingId) {
-    	String baseURI = getConfig().getApiBaseURL();
+    	String apiURI = getConfig().getApiURL();
     	String apiUsername = getConfig().getApiUsername();
-        String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MSG_RECEIPT).toString();
+        String actualUrl = new StringBuilder(apiURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MSG_RECEIPT).toString();
 
         MultiMap<String, String> qParams = new MultiMap<>();
         if (sourceTrackingId != null && !"".equals(sourceTrackingId)) {
@@ -46,9 +46,9 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
     }
 
     public Result<InputStream, ResponseStatus> getSendMessageResult(Map<String, Object> messageBody) {
-    	String baseURI = getConfig().getApiBaseURL();
+    	String apiURI = getConfig().getApiURL();
     	String apiUsername = getConfig().getApiUsername();
-        String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MESSAGES).toString();
+        String actualUrl = new StringBuilder(apiURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MESSAGES).toString();
 
         byte[] byteArray = PauboxUtils.getByteArrayData(messageBody);
 

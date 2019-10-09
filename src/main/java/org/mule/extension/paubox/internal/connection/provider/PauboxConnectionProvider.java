@@ -15,7 +15,7 @@ import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpClientConfiguration;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
-import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiBaseURLValue;
+import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiURLValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiKeyValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiUsernameValue;
 import static org.mule.extension.paubox.internal.error.ErrorTypes.getError;
@@ -53,7 +53,7 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
 	@Override
 	public ConnectionValidationResult validate(PauboxConnection connection) {
 
-		String baseURI = getApiBaseURLValue();
+		String apiURI = getApiURLValue();
 		String apiUsername = getApiUsernameValue();
 
 		if (apiUsername == null || apiUsername.isEmpty()) {
@@ -61,7 +61,7 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
 					new PauboxConnectorException("API Username is empty.", getError(1)));
 		}
 
-		String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername)
+		String actualUrl = new StringBuilder(apiURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername)
 				.append(Urls.SPLIT_EXPRESSION).append(Urls.STATUS).toString();
 		try {
 			HttpRequest request = connection.getHttpRequestBuilder().method(HttpConstants.Method.GET).uri(actualUrl)

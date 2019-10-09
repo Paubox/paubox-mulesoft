@@ -22,24 +22,24 @@ public class PauboxConfiguration implements ConnectorConfig {
 
     @Parameter
     @Optional(defaultValue = "https://api.paubox.net/v1/")
-    @Summary("Base URL of the Paubox REST API")
-    protected static String apiBaseURL;
+    @Summary("URL to access the Paubox REST API")
+    protected static String apiURL;
 
     @Parameter
-    @Summary("Paubox API Key")
+    @Summary("The API Key for the Paubox API's domain")
     protected static String apiKey;
 
     @Parameter
-    @Summary("Paubox API Username")
+    @Summary("The API Endpoint username for the Paubox API's domain")
     protected static String apiUsername;
 
 
-    public String getApiBaseURL() {
-        return apiBaseURL;
+    public String getApiURL() {
+        return apiURL;
     }
 
-    public static String getApiBaseURLValue(){
-        return apiBaseURL;
+    public static String getApiURLValue(){
+        return apiURL;
     }
 
     public String getApiUsername() {
