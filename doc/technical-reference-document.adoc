@@ -1,0 +1,254 @@
+:toc:               left
+:toc-title:         Paubox Connector
+:toclevels:         2
+:last-update-label!:
+:docinfo:
+:source-highlighter: coderay
+:icons: font
+
+
+= Paubox Connector Documentation Reference
+
++++
+Send HIPAA compliant emails and obtain email delivery information with the Paubox REST API. For information about the Paubox REST API methods and parameters, please check https://www.paubox.com/solutions/email-api
++++
+
+
+== Configurations
+---
+[[config]]
+=== Config
+
++++
+Default configuration
++++
+
+==== Parameters
+[cols=".^20%,.^20%,.^35%,.^20%,^.^5%", options="header"]
+|======================
+| Name | Type | Description | Default Value | Required
+|Name | String | The name for this configuration. Connectors reference the configuration with this name. | | *x*{nbsp}
+| Connection a| <<config_connection, Connection>>
+ | The connection types that can be provided to this configuration. | | *x*{nbsp}
+| Api URL a| String |  +++URL to access the Paubox REST API+++ |  +++https://api.paubox.net/v1/+++ | {nbsp}
+| Api Key a| String |  +++The API Key for the Paubox API's domain+++ |  | *x*{nbsp}
+| Api Username a| String |  +++The API Endpoint username for the Paubox API's domain+++ |  | *x*{nbsp}
+| Expiration Policy a| <<ExpirationPolicy>> |  +++Configures the minimum amount of time that a dynamic configuration instance can remain idle before the runtime considers it eligible for expiration. This does not mean that the platform will expire the instance at the exact moment that it becomes eligible. The runtime will actually purge the instances when it sees it fit.+++ |  | {nbsp}
+|======================
+
+==== Connection Types
+[[config_connection]]
+===== Connection
+
+
+====== Parameters
+[cols=".^20%,.^20%,.^35%,.^20%,^.^5%", options="header"]
+|======================
+| Name | Type | Description | Default Value | Required
+| Reconnection a| <<Reconnection>> |  +++When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy+++ |  | {nbsp}
+|======================
+
+==== Associated Operations
+* <<getEmailDisposition>> {nbsp}
+* <<sendMessage>> {nbsp}
+
+
+
+== Operations
+
+[[getEmailDisposition]]
+=== Get Email Disposition
+`<paubox:get-email-disposition>`
+
++++
+Get email disposition
++++
+
+==== Parameters
+[cols=".^20%,.^20%,.^35%,.^20%,^.^5%", options="header"]
+|======================
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Source Tracking Id a| String |  +++Message's Source Tracking ID+++ |  | *x*{nbsp}
+| Streaming Strategy a| * <<repeatable-in-memory-stream>>
+* <<repeatable-file-store-stream>>
+* <<non-repeatable-stream>> |  +++Configure if repeatable streams should be used and their behaviour+++ |  | {nbsp}
+| Target Variable a| String |  +++The name of a variable on which the operation's output will be placed+++ |  | {nbsp}
+| Target Value a| String |  +++An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable+++ |  +++#[payload]+++ | {nbsp}
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  +++A retry strategy in case of connectivity errors+++ |  | {nbsp}
+|======================
+
+==== Output
+[cols=".^50%,.^50%"]
+|======================
+| *Type* a| Any
+| *Attributes Type* a| <<ResponseStatus>>
+|======================
+
+==== For Configurations.
+* <<config>> {nbsp}
+
+==== Throws
+* PAUBOX:NOT_IMPLEMENTED {nbsp}
+* PAUBOX:CONNECTIVITY {nbsp}
+* PAUBOX:GENERIC_EXCEPTION {nbsp}
+* PAUBOX:CONFLICT {nbsp}
+* PAUBOX:INVALID_CONFIG {nbsp}
+* PAUBOX:FORBIDDEN {nbsp}
+* PAUBOX:RETRY_EXHAUSTED {nbsp}
+* PAUBOX:SERVICE_UNAVAILABLE {nbsp}
+* PAUBOX:METHOD_NOT_ALLOWED {nbsp}
+* PAUBOX:INTERNAL_SERVER_ERROR {nbsp}
+* PAUBOX:BAD_GATEWAY {nbsp}
+* PAUBOX:NOT_ACCEPTABLE {nbsp}
+* PAUBOX:UNAUTHORIZED {nbsp}
+* PAUBOX:BAD_REQUEST {nbsp}
+* PAUBOX:NOT_FOUND {nbsp}
+* PAUBOX:REQUEST_TIMEOUT {nbsp}
+
+
+[[sendMessage]]
+=== Send Message
+`<paubox:send-message>`
+
++++
+Send Message
++++
+
+==== Parameters
+[cols=".^20%,.^20%,.^35%,.^20%,^.^5%", options="header"]
+|======================
+| Name | Type | Description | Default Value | Required
+| Configuration | String | The name of the configuration to use. | | *x*{nbsp}
+| Message Body a| Object |  +++Message Body+++ |  +++#[payload]+++ | {nbsp}
+| Streaming Strategy a| * <<repeatable-in-memory-stream>>
+* <<repeatable-file-store-stream>>
+* <<non-repeatable-stream>> |  +++Configure if repeatable streams should be used and their behaviour+++ |  | {nbsp}
+| Target Variable a| String |  +++The name of a variable on which the operation's output will be placed+++ |  | {nbsp}
+| Target Value a| String |  +++An expression that will be evaluated against the operation's output and the outcome of that expression will be stored in the target variable+++ |  +++#[payload]+++ | {nbsp}
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> |  +++A retry strategy in case of connectivity errors+++ |  | {nbsp}
+|======================
+
+==== Output
+[cols=".^50%,.^50%"]
+|======================
+| *Type* a| Any
+| *Attributes Type* a| <<ResponseStatus>>
+|======================
+
+==== For Configurations.
+* <<config>> {nbsp}
+
+==== Throws
+* PAUBOX:NOT_IMPLEMENTED {nbsp}
+* PAUBOX:CONNECTIVITY {nbsp}
+* PAUBOX:GENERIC_EXCEPTION {nbsp}
+* PAUBOX:CONFLICT {nbsp}
+* PAUBOX:INVALID_CONFIG {nbsp}
+* PAUBOX:FORBIDDEN {nbsp}
+* PAUBOX:RETRY_EXHAUSTED {nbsp}
+* PAUBOX:SERVICE_UNAVAILABLE {nbsp}
+* PAUBOX:METHOD_NOT_ALLOWED {nbsp}
+* PAUBOX:INTERNAL_SERVER_ERROR {nbsp}
+* PAUBOX:BAD_GATEWAY {nbsp}
+* PAUBOX:NOT_ACCEPTABLE {nbsp}
+* PAUBOX:UNAUTHORIZED {nbsp}
+* PAUBOX:BAD_REQUEST {nbsp}
+* PAUBOX:NOT_FOUND {nbsp}
+* PAUBOX:REQUEST_TIMEOUT {nbsp}
+
+
+
+== Types
+[[Reconnection]]
+=== Reconnection
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Fails Deployment a| Boolean | When the application is deployed, a connectivity test is performed on all connectors. If set to true, deployment will fail if the test doesn't pass after exhausting the associated reconnection strategy |  | 
+| Reconnection Strategy a| * <<reconnect>>
+* <<reconnect-forever>> | The reconnection strategy to use |  | 
+|======================
+
+[[reconnect]]
+=== Reconnect
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+| Count a| Number | How many reconnection attempts to make |  | 
+|======================
+
+[[reconnect-forever]]
+=== Reconnect Forever
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Frequency a| Number | How often (in ms) to reconnect |  | 
+|======================
+
+[[ExpirationPolicy]]
+=== Expiration Policy
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Max Idle Time a| Number | A scalar time value for the maximum amount of time a dynamic configuration instance should be allowed to be idle before it's considered eligible for expiration |  | 
+| Time Unit a| Enumeration, one of:
+
+** NANOSECONDS
+** MICROSECONDS
+** MILLISECONDS
+** SECONDS
+** MINUTES
+** HOURS
+** DAYS | A time unit that qualifies the maxIdleTime attribute |  | 
+|======================
+
+[[ResponseStatus]]
+=== Response Status
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Headers a| Object |  |  | 
+| Status Code a| Number |  |  | 
+|======================
+
+[[repeatable-in-memory-stream]]
+=== Repeatable In Memory Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| Initial Buffer Size a| Number | This is the amount of memory that will be allocated in order to consume the stream and provide random access to it. If the stream contains more data than can be fit into this buffer, then it will be expanded by according to the bufferSizeIncrement attribute, with an upper limit of maxInMemorySize. |  | 
+| Buffer Size Increment a| Number | This is by how much will be buffer size by expanded if it exceeds its initial size. Setting a value of zero or lower will mean that the buffer should not expand, meaning that a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised when the buffer gets full. |  | 
+| Max Buffer Size a| Number | This is the maximum amount of memory that will be used. If more than that is used then a STREAM_MAXIMUM_SIZE_EXCEEDED error will be raised. A value lower or equal to zero means no limit. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which all these attributes are expressed |  | 
+|======================
+
+[[repeatable-file-store-stream]]
+=== Repeatable File Store Stream
+
+[cols=".^20%,.^25%,.^30%,.^15%,.^10%", options="header"]
+|======================
+| Field | Type | Description | Default Value | Required
+| In Memory Size a| Number | Defines the maximum memory that the stream should use to keep data in memory. If more than that is consumed then it will start to buffer the content on disk. |  | 
+| Buffer Unit a| Enumeration, one of:
+
+** BYTE
+** KB
+** MB
+** GB | The unit in which maxInMemorySize is expressed |  | 
+|======================
+
