@@ -1,15 +1,40 @@
-= Anypoint™ Paubox Connector Release Notes
+= Paubox Connector Release Notes
 
+:keywords: Paubox, Mulesoft, Paubox Connector, Paubox REST API
 
-== Paubox Connector Release Notes
+The Paubox Connector allow users to send HIPAA compliant emails and obtain email delivery information using the Paubox REST API.
 
-=== Contents
+For more information about the Paubox REST API methods and parameters, see the link:https://www.paubox.com/solutions/email-api[Paubox REST API reference.]
 
-- Features
+== 1.0.0 - Sep 24, 2019
 
-Release Notes for version 1.0.0 of the *Paubox connector*. These Release Notes accompany the <URL> guide.
+=== Version 1.0.0 Compatibility
+
+[%header%autowidth]
+|===
+|Software |Version
+|Mule Runtime | 4.1.0 or later
+|Anypoint Studio | 7.0 or later
+|Java | 8
+|Paubox REST API | v1
+|===
+
+=== Migrating from Older Versions
+This is the first release. There are no previous versions.
 
 === Features
 
-. Send Messages
-. Get Email Disposition
+. Send Message - Send HIPAA compliant emails using the Paubox Send Message REST API.
+
+. Get Email Dispostion - Get email delivery information using the Paubox Get Email Disposition REST API.
+
+=== 1.0.0 Fixed in this Release
+This is the first release.
+
+=== 1.0.0 Known Issues
+. *Test Connection* functionality is not working as designed when used in Anypoint Flow Designer. However, it is working successfully when used in Anypoint Studio.
+
+=== See Also
+
+* link:https://help.mulesoft.com/s/forum[MuleSoft Forum]
+* link:https://help.mulesoft.com/s/knowledge[Knowledge Base Articles]
