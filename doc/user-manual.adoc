@@ -32,7 +32,7 @@ To use the Paubox connector with Maven, find dependency information on the *Depe
 . Select the *Paubox Connector*.
 . Select an operation from the list.
 . Configure the connector's global element.
-** *Api URL*: URL to access the Paubox REST API
+** *Api URL*: URL to access the Paubox REST API. The default value is `+https://api.paubox.net/v1/+`
 ** *Api Key*: The API Key for the Paubox API's domain
 ** *Api Username*: The Endpoint username for the Paubox API's domain
 . Enter the parameters that are required for the particular operation.
@@ -59,7 +59,7 @@ This action automatically populates the XML code with the connector namespace an
 . Select and drag a connector operation to the Studio Canvas.
 . Configure the connector's global element. You can either enter your API credentials as global configuration properties or reference a configuration file that contains these values.
 For simpler maintenance and better reuse of your project, MuleSoft recommends that you use a configuration file.
-** *Api URL*: URL to access the Paubox REST API
+** *Api URL*: URL to access the Paubox REST API. The default value is `+https://api.paubox.net/v1/+`
 ** *Api Key*: The API Key for the Paubox API's domain
 ** *Api Username*: The Endpoint username for the Paubox API's domain
 +
