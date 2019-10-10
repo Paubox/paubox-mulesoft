@@ -1,37 +1,33 @@
+/**
+ * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1, a copy of which has been included with this distribution in the LICENSE.md file.
+ */
 package org.mule.extension.paubox.internal.connection.provider;
 
 import org.mule.extension.paubox.internal.connection.PauboxConnection;
 import org.mule.extension.paubox.internal.error.exception.PauboxConnectorException;
 import org.mule.extension.paubox.internal.util.Urls;
-import org.mule.connectors.commons.template.connection.ConnectorConnectionProvider;
-import org.mule.runtime.api.connection.*;
-import org.mule.runtime.extension.api.annotation.param.Parameter;
-import org.mule.runtime.extension.api.annotation.param.ParameterGroup;
-import org.mule.runtime.extension.api.annotation.param.display.Placement;
+import org.mule.runtime.api.connection.ConnectionException;
+import org.mule.runtime.api.connection.ConnectionProvider;
+import org.mule.runtime.api.connection.ConnectionValidationResult;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.HttpService;
 import org.mule.runtime.http.api.client.HttpClient;
 import org.mule.runtime.http.api.client.HttpClientConfiguration;
-import org.mule.runtime.http.api.client.auth.HttpAuthentication;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
-import org.mule.runtime.http.api.tcp.TcpClientSocketProperties;
-import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiBaseURLValue;
+import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiURLValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiKeyValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiUsernameValue;
 import static org.mule.extension.paubox.internal.error.ErrorTypes.getError;
 import static org.mule.extension.paubox.internal.util.RequestService.sendAsyncRequest;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.inject.Inject;
-
 import java.util.concurrent.CompletableFuture;
 
 public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnection> {
 
-	private static final Logger logger = LoggerFactory.getLogger(PauboxConnectionProvider.class);
+	private static final org.slf4j.Logger logger = LoggerFactory.getLogger(PauboxConnectionProvider.class);
 
 	@Inject
 	private HttpService httpService;
@@ -57,7 +53,7 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
 	@Override
 	public ConnectionValidationResult validate(PauboxConnection connection) {
 
-		String baseURI = getApiBaseURLValue();
+		String apiURI = getApiURLValue();
 		String apiUsername = getApiUsernameValue();
 
 		if (apiUsername == null || apiUsername.isEmpty()) {
@@ -65,7 +61,7 @@ public class PauboxConnectionProvider implements ConnectionProvider<PauboxConnec
 					new PauboxConnectorException("API Username is empty.", getError(1)));
 		}
 
-		String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername)
+		String actualUrl = new StringBuilder(apiURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername)
 				.append(Urls.SPLIT_EXPRESSION).append(Urls.STATUS).toString();
 		try {
 			HttpRequest request = connection.getHttpRequestBuilder().method(HttpConstants.Method.GET).uri(actualUrl)

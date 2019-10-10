@@ -1,7 +1,215 @@
-= Paubox Connector
+= Paubox Connector - Mule 4
+:imagesdir: ../images
 
+Paubox's HIPAA compliant encrypted email API allows hospitals, health management organizations (HMOs), clinics, doctors, and other covered entities to integrate Paubox's seamless and secure email solution with their IT infrastructure. The uses range from integrating with patient portals to securing website contact forms.
+
+This API also allows third-party developers who are creating innovative healthcare IT solutions to focus on their applications instead of building and maintaining a HIPAA compliant email server. This can help developers get to market faster and quickly integrate a seamless email product that works on desktops, laptops, smartphones, tablets and wearables.
+
+Take advantage of Paubox's experience with maintaining HIPAA compliance with email and focus on innovation.
+
+The Anypoint Connector for Paubox allow users to send HIPAA compliant emails and obtain email delivery information using the Paubox REST API.
+
+For more information about the Paubox REST API methods and parameters, see the link:https://www.paubox.com/solutions/email-api[Paubox REST API reference.]
+
+
+== Prerequisites
+
+This document assumes that you are familiar with Paubox REST API, Mule,
+link:https://docs.mulesoft.com/connectors/[Anypoint Connectors],
+link:https://docs.mulesoft.com/studio/7.3/[Anypoint Studio] and link:https://docs.mulesoft.com/mule-runtime/4.2/mule-concepts[Mule Concepts.]
+
+You will need a Paubox account and API credentials to use the connector. Please sign up link:https://www.paubox.com/join/see-pricing?unit=messages[here] to create a Paubox account. Once you have an account, follow the instructions on the Rest API dashboard to verify domain ownership and generate API credentials.
+
+For software requirements and compatibility, see the Connector Release Notes.
+
+To use the Paubox connector with Maven, find dependency information on the *Dependency Snippets* tab of Paubox connector's page on the Anypoint Exchange.
+
+== Configure Paubox Connector in the Design Center
+
+. In the Design Center, create a Mule application.
+. On the canvas, configure HTTP Listener or Scheduler as a *trigger*.
+. Click the *+* icon to add a component.
+. Select the *Paubox Connector*.
+. Select an operation from the list.
+. Configure the connector's global element.
+** *Api URL*: URL to access the Paubox REST API. The default value is `+https://api.paubox.net/v1/+`
+** *Api Key*: The API Key for the Paubox API's domain
+** *Api Username*: The Endpoint username for the Paubox API's domain
+. Enter the parameters that are required for the particular operation.
+
+== Install Paubox Connector in Anypoint Studio
+
+. In Anypoint Studio, click the Open Exchange icon in the Studio taskbar.
+. Click *Login* in Anypoint Exchange.
+. Search for the Paubox connector, and click *Add to project*.
+. Follow the prompts to install the connector.
+
+== Connector Namespace and Schema
+
+When designing your application in the Anypoint Studio, drag the connector's operation from the palette to the canvas.
+This action automatically populates the XML code with the connector namespace and schema location.
+
+* Namespace: `+http://www.mulesoft.org/schema/mule/paubox+`
+* Schema Location: `+http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd+`
+
+== Configure Paubox Connector in Anypoint Studio
+
+. In Anypoint Studio, create a new Mule project. Ensure that you have *HTTP Listener* configured.
+. Select *Paubox* from the Mule Palette.
+. Select and drag a connector operation to the Studio Canvas.
+. Configure the connector's global element. You can either enter your API credentials as global configuration properties or reference a configuration file that contains these values.
+For simpler maintenance and better reuse of your project, MuleSoft recommends that you use a configuration file.
+** *Api URL*: URL to access the Paubox REST API. The default value is `+https://api.paubox.net/v1/+`
+** *Api Key*: The API Key for the Paubox API's domain
+** *Api Username*: The Endpoint username for the Paubox API's domain
++
+TIP: An example configuration file for Paubox is available at `src/main/resources/configuration.yaml`. You can add this file in the Configuration Properties of the Global Configuration Elements.
++
+. To ensure that your connection is successful, Click *Test Connection*.
+
+== Use Case: Send a HIPAA compliant encrypted email and obtain the email's delivery information
+
+The following use case demonstrates how you can use the Paubox connector to:
+
+* Send a HIPAA compliant encrypted email.
+* Obtain encrypted email's delivery information.
+
+image::paubox-send-email-get-email-data.jpg[]
+
+To test this use case:
+
+. Create a Mule application and set the connector configuration properties in the configuration file in the `src/main/resources`. For example:
++
+[source, yaml, linenums]
+----
+paubox:
+  apiurl: "<url-to-access-paubox-api>"
+  apikey: "<api-key-for-paubox-api-domain>"
+  apiusername: "<endpoint-username-for-paubox-api-domain>"
+----
++
+. Add the configuration file for the Paubox connector to the *Configuration Properties* of the *Global Configuration Elements*.
+
+To create the new Mule application flow:
+
+. Drag an HTTP Listener to the canvas and configure it.
+.. Set *Path* in the *General* section to `/sendEmailAndGetEmailDetails`.
+. From the *Mule Palette*, search for the Paubox connector and drag *Send Message* operation. To configure the Send Message operation:
+.. Use the following example payload in the *Message body* of the *General* section:
++
+[source, json, linenums]
+----
+{
+  "data": {
+    "message": {
+      "recipients": [
+        "<recipient's email address>"
+      ],
+      "headers": {
+        "from": "<sender's email address>",
+        "subject": "Testing from Mulesoft"
+      },
+      "content": {
+        "text/plain": "Hello World!",
+        "text/html": "<h1>Hello World!</h1>"
+      },
+      "attachments": []
+    }
+  }
+}
+----
++
+.. Please modify the recipient's and sender's email address placeholders in above json, as per your requirement. The sender email address' domain should be an approved sending domain for your Paubox account.
+. From the *Mule Palette*, search and drag *Set Variable* operation after the Paubox Send Message operation, to capture the source tracking ID returned from Paubox API into a variable. In the *Settings* section of the *Set Variable* operation, set the following:
+.. *Name*: `sourceTrackingId`
+.. *Value*: `#[payload.sourceTrackingId]`
+. From Paubox operations, drag *Get Email Disposition* operation.
+.. Set *Source Tracking id* in the *General* section to `#[vars.sourceTrackingId]`.
+.. Set the *Target Value* in the *Advanced* section to `#[payload]`.
+. Run the application and point your browser to `+http://localhost:8081/sendEmailAndGetEmailDetails+`.
+. Below is an example of a successful output json which will be displayed in the browser.
+[source, json, linenums]
+----
+{
+  "sourceTrackingId": "6e1cf9a4-7bde-4834-8200-ed424b50c8a7",
+  "data": {
+    "message": {
+      "id": "<f4a9b518-439c-497d-b87f-dfc9cc19194b@authorized_domain.com>",
+      "message_deliveries": [
+        {
+          "recipient": "recipient@host.com",
+          "status": {
+            "deliveryStatus": "delivered",
+            "deliveryTime": "Mon, 23 Apr 2018 13:27:34 -0700",
+            "openedStatus": "opened",
+            "openedTime": "Mon, 23 Apr 2018 13:27:51 -0700"
+          }
+        }
+      ]
+    }
+  }
+}
+----
+== Use Cases XML: Send a HIPAA compliant encrypted email and obtain the email's delivery information
+
+Please modify the recipient's and sender's email address placeholders in below xml, as per your requirement. The sender email address' domain should be an approved sending domain for your Paubox account.
+
+[source, xml, linenums]
+----
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:paubox="http://www.mulesoft.org/schema/mule/paubox"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd
+http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/paubox/current/mule-paubox.xsd">
+
+	<flow name="SEND_EMAIL_GET_EMAIL_DETAILS" doc:id="8f2e1fde-e7e1-4673-9a77-d9a630eada5c">
+		<http:listener doc:name="Listener"
+			doc:id="27c1fbba-bc1a-49f9-94a0-183e6ed4fae0" config-ref="HTTP_Listener_config"
+			path="/sendEmailAndGetEmailDetails" >
+		</http:listener>
+		<paubox:send-message doc:name="Send Message"
+			doc:id="1b2320df-eac2-48f8-9dcf-9101ace2594d" config-ref="Paubox_Config">
+			<paubox:message-body><![CDATA[#[{
+  "data": {
+    "message": {
+      "recipients": [
+        "<recipient's email address>"
+      ],
+      "headers": {
+        "from": "<sender's email address>",
+        "subject": "Testing from Mulesoft"
+      },
+      "content": {
+        "text/plain": "Hello World!",
+        "text/html": "<h1>Hello World!</h1>"
+      },
+      "attachments": []
+    }
+  }
+}]]]></paubox:message-body>
+		</paubox:send-message>
+		<set-variable
+			value="#[%dw 2.0
+output application/java
 ---
+payload.sourceTrackingId]"
+			doc:name="Save Source Tracking Id" doc:id="6d50b287-a788-4d35-ae6d-7372d4a5e9be"
+			variableName="sourceTrackingId" />
+		<paubox:get-email-disposition doc:name="Get Email Disposition"
+			doc:id="cd6908fc-0fbc-447f-999c-c733ac99a83d" sourceTrackingId="#[vars.sourceTrackingId]"
+			config-ref="Paubox_Config" />
 
-== Contents: TO DO
 
+	</flow>
+</mule>
+----
 
+== See Also
+
+* https://help.mulesoft.com/s/forum[MuleSoft Forum]
+* https://help.mulesoft.com/s/knowledge[Knowledge Base Articles]

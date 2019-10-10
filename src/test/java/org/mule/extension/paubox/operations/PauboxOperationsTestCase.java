@@ -1,22 +1,22 @@
+/**
+ * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1, a copy of which has been included with this distribution in the LICENSE.md file.
+ */
 package org.mule.extension.paubox.operations;
-
-import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.mule.extension.paubox.common.TestDataBuilder;
 import org.mule.functional.junit4.MuleArtifactFunctionalTestCase;
 import org.mule.runtime.api.event.Event;
 import org.mule.runtime.api.metadata.DataType;
 
-import static org.hamcrest.Matchers.is;
-
 import java.io.InputStream;
-import java.util.List;
 import java.util.Map;
-
 import org.json.JSONObject;
 import org.junit.Assert;
 import org.junit.Test;
-import static org.mule.extension.paubox.common.TestDataBuilder.*;
+import static org.mule.extension.paubox.common.TestDataBuilder.getSuccessfulEmailDispositionData;
+import static org.mule.extension.paubox.common.TestDataBuilder.getFailureEmailDispositionData;
+import static org.mule.extension.paubox.common.TestDataBuilder.createMessageData;
+import static org.mule.extension.paubox.common.TestDataBuilder.createInvalidMessageData;
 
 public class PauboxOperationsTestCase extends MuleArtifactFunctionalTestCase {
 

@@ -1,3 +1,6 @@
+/**
+ * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1, a copy of which has been included with this distribution in the LICENSE.md file.
+ */
 package org.mule.extension.paubox.internal.service;
 
 import org.mule.extension.paubox.api.ResponseStatus;
@@ -10,12 +13,11 @@ import org.mule.runtime.api.util.MultiMap;
 import org.mule.runtime.extension.api.runtime.operation.Result;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
+import org.mule.runtime.core.api.util.IOUtils;
 
 import java.io.InputStream;
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
-
-import org.mule.runtime.core.api.util.IOUtils;
 
 import static org.mule.extension.paubox.internal.attributes.AttributesUtil.setResponseAttributes;
 import static org.mule.extension.paubox.internal.error.exception.ResponseValidator.checkErrorResponse;
@@ -26,9 +28,9 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
     }
 
     public Result<InputStream, ResponseStatus> getEmailDispositionResult(String sourceTrackingId) {
-    	String baseURI = getConfig().getApiBaseURL();
+    	String apiURI = getConfig().getApiURL();
     	String apiUsername = getConfig().getApiUsername();
-        String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MSG_RECEIPT).toString();
+        String actualUrl = new StringBuilder(apiURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MSG_RECEIPT).toString();
 
         MultiMap<String, String> qParams = new MultiMap<>();
         if (sourceTrackingId != null && !"".equals(sourceTrackingId)) {
@@ -44,9 +46,9 @@ public class APIServiceImpl extends DefaultConnectorService<PauboxConfiguration,
     }
 
     public Result<InputStream, ResponseStatus> getSendMessageResult(Map<String, Object> messageBody) {
-    	String baseURI = getConfig().getApiBaseURL();
+    	String apiURI = getConfig().getApiURL();
     	String apiUsername = getConfig().getApiUsername();
-        String actualUrl = new StringBuilder(baseURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MESSAGES).toString();
+        String actualUrl = new StringBuilder(apiURI).append(Urls.SPLIT_EXPRESSION).append(apiUsername).append(Urls.SPLIT_EXPRESSION).append(Urls.MESSAGES).toString();
 
         byte[] byteArray = PauboxUtils.getByteArrayData(messageBody);
 
