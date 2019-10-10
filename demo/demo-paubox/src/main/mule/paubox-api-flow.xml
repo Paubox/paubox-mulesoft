@@ -22,7 +22,7 @@ http://www.mulesoft.org/schema/mule/paubox http://www.mulesoft.org/schema/mule/p
         "recipient@domain.com"
       ],
       "headers": {
-        "from": "sender@domain.com",
+        "from": "sender@authorized_domain.com",
         "subject": "Testing from Mulesoft"
       },
       "content": {

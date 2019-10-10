@@ -1,3 +1,6 @@
+/**
+ * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1, a copy of which has been included with this distribution in the LICENSE.md file.
+ */
 package org.mule.extension.paubox.internal.config;
 
 import org.mule.extension.paubox.internal.connection.provider.PauboxConnectionProvider;
@@ -19,24 +22,24 @@ public class PauboxConfiguration implements ConnectorConfig {
 
     @Parameter
     @Optional(defaultValue = "https://api.paubox.net/v1/")
-    @Summary("Base URL of the Paubox REST API")
-    protected static String apiBaseURL;
+    @Summary("URL to access the Paubox REST API")
+    protected static String apiURL;
 
     @Parameter
-    @Summary("Paubox API Key")
+    @Summary("The API Key for the Paubox API's domain")
     protected static String apiKey;
 
     @Parameter
-    @Summary("Paubox API Username")
+    @Summary("The API Endpoint username for the Paubox API's domain")
     protected static String apiUsername;
 
 
-    public String getApiBaseURL() {
-        return apiBaseURL;
+    public String getApiURL() {
+        return apiURL;
     }
 
-    public static String getApiBaseURLValue(){
-        return apiBaseURL;
+    public static String getApiURLValue(){
+        return apiURL;
     }
 
     public String getApiUsername() {

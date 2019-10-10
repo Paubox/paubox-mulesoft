@@ -1,8 +1,9 @@
+/**
+ * (c) 2003-2019 MuleSoft, Inc. The software in this package is published under the terms of the Commercial Free Software license V.1, a copy of which has been included with this distribution in the LICENSE.md file.
+ */
 package org.mule.extension.paubox.internal.connection;
 
 import java.util.concurrent.CompletableFuture;
-
-
 import org.mule.extension.paubox.internal.util.Urls;
 import org.mule.connectors.commons.template.connection.ConnectorConnection;
 import org.mule.runtime.api.util.MultiMap;
@@ -12,10 +13,7 @@ import org.mule.runtime.http.api.domain.entity.ByteArrayHttpEntity;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.request.HttpRequestBuilder;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
-
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.CompletableFuture;
 
 public final class PauboxConnection implements ConnectorConnection {
 

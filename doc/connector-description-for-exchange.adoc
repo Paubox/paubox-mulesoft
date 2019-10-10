@@ -1,0 +1,9 @@
+The Anypoint Connector for Paubox allow users to send HIPAA compliant emails and obtain email delivery information using the Paubox REST API.
+
+Paubox's HIPAA compliant encrypted email API allows hospitals, health management organizations (HMOs), clinics, doctors, and other covered entities to integrate Paubox's seamless and secure email solution with their IT infrastructure. The uses range from integrating with patient portals to securing website contact forms.
+
+This API also allows third-party developers who are creating innovative healthcare IT solutions to focus on their applications instead of building and maintaining a HIPAA compliant email server. This can help developers get to market faster and quickly integrate a seamless email product that works on desktops, laptops, smartphones, tablets and wearables.
+
+Take advantage of Paubox's experience with maintaining HIPAA compliance with email and focus on innovation.
+
+For more information about the Paubox REST API methods and parameters, see the link:https://www.paubox.com/solutions/email-api[Paubox REST API reference.]
