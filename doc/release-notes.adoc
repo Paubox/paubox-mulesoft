@@ -13,7 +13,7 @@ For more information about the Paubox REST API methods and parameters, see the l
 [%header%autowidth]
 |===
 |Software |Version
-|Mule Runtime | 4.1.0 or later
+|Mule Runtime | 4.1.1 or later
 |Anypoint Studio | 7.0 or later
 |Java | 8
 |Paubox REST API | v1
