@@ -48,7 +48,7 @@
 		</dependency>
 	</dependencies>
 	<scm>
-        <developerConnection>scm:git:git@github.com:Paubox/paubox-mulesoft.git</developerConnection>
+        <developerConnection>scm:git:https://github.com/Paubox/paubox-mulesoft.git</developerConnection>
         <url>https://github.com/Paubox/paubox-mulesoft</url>
 	</scm>
 	<build>
