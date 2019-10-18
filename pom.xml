@@ -48,7 +48,7 @@
 		</dependency>
 	</dependencies>
 	<scm>
-        <connection>scm:git:git@github.com:Paubox/paubox-mulesoft.git</connection>
+        <developerConnection>scm:git:git@github.com:Paubox/paubox-mulesoft.git</developerConnection>
         <url>https://github.com/Paubox/paubox-mulesoft</url>
 	</scm>
 	<build>
@@ -89,7 +89,7 @@
 				<artifactId>maven-scm-plugin</artifactId>
 				<version>1.11.2</version>
 				<configuration>
-					<connectionType>connection</connectionType>
+					<connectionType>developerConnection</connectionType>
 				</configuration>
       		</plugin>
 			<plugin>
