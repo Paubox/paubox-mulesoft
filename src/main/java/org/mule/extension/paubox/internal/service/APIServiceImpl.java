@@ -13,7 +13,6 @@ import org.mule.runtime.api.util.MultiMap;
 import org.mule.runtime.extension.api.runtime.operation.Result;
 import org.mule.runtime.http.api.HttpConstants;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
-import org.mule.runtime.core.api.util.IOUtils;
 
 import java.io.InputStream;
 import java.util.Map;

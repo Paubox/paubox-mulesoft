@@ -24,8 +24,6 @@ import org.mule.runtime.extension.api.runtime.operation.Result;
 import org.mule.runtime.extension.api.annotation.param.Config;
 import org.mule.runtime.extension.api.annotation.param.Connection;
 
-import static org.mule.runtime.extension.api.annotation.param.MediaType.APPLICATION_JSON;
-
 
 /**
  * This class is a container for operations, every public method in this class will be taken as an extension operation.

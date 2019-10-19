@@ -24,6 +24,6 @@ import static org.mule.runtime.api.meta.Category.CERTIFIED;
 @Configurations(PauboxConfiguration.class)
 @ConnectionProviders(PauboxConnectionProvider.class)
 @org.mule.runtime.extension.api.annotation.error.ErrorTypes(ErrorTypes.class)
-public class PauboxExtension {
+public class PauboxConnector {
 
 }

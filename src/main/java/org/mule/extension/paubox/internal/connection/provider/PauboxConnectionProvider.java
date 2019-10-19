@@ -16,7 +16,6 @@ import org.mule.runtime.http.api.client.HttpClientConfiguration;
 import org.mule.runtime.http.api.domain.message.request.HttpRequest;
 import org.mule.runtime.http.api.domain.message.response.HttpResponse;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiURLValue;
-import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiKeyValue;
 import static org.mule.extension.paubox.internal.config.PauboxConfiguration.getApiUsernameValue;
 import static org.mule.extension.paubox.internal.error.ErrorTypes.getError;
 import static org.mule.extension.paubox.internal.util.RequestService.sendAsyncRequest;

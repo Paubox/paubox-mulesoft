@@ -6,7 +6,20 @@ package org.mule.extension.paubox.internal.error;
 import org.mule.runtime.extension.api.annotation.error.ErrorTypeProvider;
 import org.mule.runtime.extension.api.error.ErrorTypeDefinition;
 
-import static org.mule.extension.paubox.internal.error.ErrorTypes.*;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.BAD_REQUEST;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.UNAUTHORIZED;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.FORBIDDEN;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.NOT_FOUND;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.METHOD_NOT_ALLOWED;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.NOT_ACCEPTABLE;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.REQUEST_TIMEOUT;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.CONFLICT;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.INTERNAL_SERVER_ERROR;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.NOT_IMPLEMENTED;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.BAD_GATEWAY;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.SERVICE_UNAVAILABLE;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.INVALID_CONFIG;
+import static org.mule.extension.paubox.internal.error.ErrorTypes.GENERIC_EXCEPTION;
 
 import java.util.HashSet;
 import java.util.Set;
