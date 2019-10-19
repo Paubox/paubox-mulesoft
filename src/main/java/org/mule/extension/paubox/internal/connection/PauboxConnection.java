@@ -4,7 +4,6 @@
 package org.mule.extension.paubox.internal.connection;
 
 import java.util.concurrent.CompletableFuture;
-import org.mule.extension.paubox.internal.util.Urls;
 import org.mule.connectors.commons.template.connection.ConnectorConnection;
 import org.mule.runtime.api.util.MultiMap;
 import org.mule.runtime.http.api.HttpConstants;
