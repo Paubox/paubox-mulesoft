@@ -15,6 +15,11 @@
 		<version>1.4.1</version>
     </parent>
 
+	<properties>
+        <sonar.jacoco.reportPath>${project.basedir}/target/jacoco.exec</sonar.jacoco.reportPath>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/target/site/jacoco-ut/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+    </properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.json</groupId>
