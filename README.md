@@ -1,8 +1,10 @@
-Mule Paubox Connector
-=========================
-The Paubox Connector allow users to send HIPAA compliant emails and obtain email delivery information using the Paubox REST API.
+<img src="https://github.com/Paubox/paubox-csharp/raw/master/paubox_logo.png" alt="Paubox" width="150px">
 
-For more information about the Paubox REST API methods and parameters, see the [Paubox REST API reference.](https://www.paubox.com/solutions/email-api)
+Paubox MuleSoft Connector
+=========================
+The Paubox Connector allow users to send HIPAA compliant emails and obtain email delivery information using the Paubox Email  API.
+
+For more information about the Paubox Email API methods and parameters, see the [Paubox REST API reference.](https://www.paubox.com/solutions/email-api)
 
 Mule supported versions
 ----------------------
